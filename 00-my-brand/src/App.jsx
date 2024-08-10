@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
+
+import {ColorPicker} from './components/ColorPicker';
+import {TextInput} from './components/TextInput';
+import {ContrastPair} from './components/ContrastPairs';
+
 import './App.css';
 
 function App() {
-  const [numColors, setNumColors] = useState(2); // Número inicial de colores
-  const [colors, setColors] = useState(['#000000', '#ffffff']); // Colores iniciales
+  const [numColors, setNumColors] = useState(2);
+  const [colors, setColors] = useState(['#000000', '#ffffff']);
   const [contrastRatios, setContrastRatios] = useState([]);
-  const [userText, setUserText] = useState(null); // Texto por defecto
+  const [userText, setUserText] = useState('');
 
-  // Efecto para ajustar la cantidad de colores
   useEffect(() => {
     if (colors.length < numColors) {
       setColors([...colors, ...Array(numColors - colors.length).fill('#000000')]);
@@ -23,7 +27,7 @@ function App() {
   };
 
   const handleNumColorsChange = (e) => {
-    const value = Math.max(2, Math.min(6, parseInt(e.target.value, 10) || 2)); // Limitar entre 2 y 6
+    const value = Math.max(2, Math.min(8, parseInt(e.target.value, 10) || 2));
     setNumColors(value);
   };
 
@@ -40,12 +44,12 @@ function App() {
           color1: colors[i],
           color2: colors[j],
           ratio: ratio.toFixed(2),
-          isSwitched: false // Agregamos un estado de switch individual para cada combinación
+          isSwitched: false
         });
       }
     }
     ratios.sort((a, b) => b.ratio - a.ratio);
-    setContrastRatios(ratios.slice(0, 6));
+    setContrastRatios(ratios.slice(0, 10));
   };
 
   const handleSwitchToggle = (index) => {
@@ -76,8 +80,8 @@ function App() {
   };
 
   return (
-    <div className="App w-1/2 m-auto flex flex-col items-center justify-center">
-      <h1 className='mt-10 text-3xl'>Color Contrast Checker</h1>
+    <div className="App w-3/4 m-auto flex flex-col items-center justify-center">
+      <h1 className='font-semibold mt-10 text-5xl bg-gradient-to-br from-blue-500 to-purple-500 bg-clip-text text-transparent'>Color Contrast Checker</h1>
 
       <div className='mt-4 flex gap-4 items-center'>
         <label htmlFor="numColors">Cantidad de colores:</label>
@@ -87,67 +91,40 @@ function App() {
           id="numColors"
           value={numColors}
           min="2"
-          max="6"
+          max="8"
           onChange={handleNumColorsChange}
         />
       </div>
 
-      <div className='mt-4 flex gap-4 items-center'>
-        <label htmlFor="userText">Texto para visualizar:</label>
-        <input
-          className='p-1 rounded-md outline-1 outline-blue-500'
-          type="text"
-          id="userText"
-          value={userText}
-          onChange={handleTextChange}
-          placeholder="Introduce tu texto aquí"
-        />
-      </div>
+      <TextInput userText={userText} onChange={handleTextChange} />
 
       <div className='mt-4 grid grid-cols-2 gap-4'>
         {colors.map((color, index) => (
-          <div key={index}>
-            <input
-              type="color"
-              id={`color${index}`}
-              value={color}
-              onChange={(e) => handleColorChange(index, e.target.value)}
-            />
-          </div>
+          <ColorPicker
+            key={index}
+            color={color}
+            index={index}
+            onChange={handleColorChange}
+          />
         ))}
       </div>
-      
 
-      <button 
+      <button
         onClick={calculateContrast}
-        className='mt-4 p-4 bg-blue-500 text-white rounded-full'
-        
-        >Calcular Contraste</button>
-      <div className="mt-4 w-3/4">
+        className='mt-4 py-4 px-6 bg-blue-500 transition duration-150 ease-in-out hover:bg-purple-500 font-medium text-white rounded-full'
+      >
+        Calcular Contraste
+      </button>
+
+      <div className="mt-4 w-3/4 grid grid-cols-2 gap-4">
         {contrastRatios.length > 0 &&
           contrastRatios.map((combo, index) => (
-            <div key={index} className='mt-4'>
-              <div
-                className="min-h-20 p-3"
-                style={{
-                  backgroundColor: combo.isSwitched ? combo.color2 : combo.color1,
-                  color: combo.isSwitched ? combo.color1 : combo.color2,
-                }}
-              >
-                {userText}
-              </div>
-              <p className='text-center'>{combo.ratio}</p>
-              <label htmlFor={`switch${index}`}>
-                Switch
-              </label>
-              <input
-                className='m-1'
-                type="checkbox"
-                id={`switch${index}`}
-                checked={combo.isSwitched}
-                onChange={() => handleSwitchToggle(index)}
-              />
-            </div>
+            <ContrastPair
+              key={index}
+              combo={combo}
+              userText={userText}
+              onSwitchToggle={() => handleSwitchToggle(index)}
+            />
           ))}
       </div>
     </div>
