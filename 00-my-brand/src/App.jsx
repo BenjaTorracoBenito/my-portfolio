@@ -100,7 +100,7 @@ function App() {
 
       <TextInput userText={userText} onChange={handleTextChange} />
 
-      <div className='mt-4 grid grid-cols-2 gap-4'>
+      <div className='mt-4 grid md:grid-cols-2 gap-4 grid-cols-1'>
         {colors.map((color, index) => (
           <ColorPicker
             key={index}
