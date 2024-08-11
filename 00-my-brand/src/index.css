@@ -55,3 +55,17 @@ body {
 .input::-webkit-color-swatch:hover {
     border: solid 2px #9333ea
 }
+
+@media (max-width: 800px) {
+    input[type="number"] {
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+}

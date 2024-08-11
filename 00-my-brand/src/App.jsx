@@ -90,6 +90,8 @@ function App() {
           type="number"
           id="numColors"
           value={numColors}
+          inputMode='numeric'
+          pattern='[0-9]*'
           min="2"
           max="8"
           onChange={handleNumColorsChange}
