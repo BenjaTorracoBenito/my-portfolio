@@ -1,9 +1,8 @@
 export function TextInput({ userText, onChange }) {
     return (
-        <div className='mt-4 flex gap-4 items-center'>
-            <label htmlFor="userText">Texto para visualizar:</label>
+        <div className='omnes-light italic text-lg mt-4 flex gap-4 items-center'>
             <input
-                className='p-1 rounded-md outline-1 outline-blue-500'
+                className='omnes-light italic p-2 rounded-md outline-1 border-2 border-blue-500 outline-purple-500'
                 type="text"
                 id="userText"
                 value={userText}

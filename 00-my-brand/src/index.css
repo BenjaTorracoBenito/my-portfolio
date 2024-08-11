@@ -3,5 +3,55 @@
 @tailwind utilities;
 
 body {
-    @apply bg-blue-50;
+    @apply bg-white;
+}
+
+.omnes-light {
+    font-family: "omnes-pro", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.sofia-soft {
+    font-family: sofia-pro-soft, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+
+.input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.input::-webkit-color-swatch {
+    border-radius: 50%;
+    border: solid 2px #3b82f6;
+}
+
+.input::-webkit-color-swatch:hover {
+    border: solid 2px #9333ea
+}
+.input::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.input::-moz-color-swatch {
+    border-radius: 50%;
+    border: solid 2px #3b82f6; 
+}
+
+.input::-webkit-color-swatch:hover {
+    border: solid 2px #9333ea
 }

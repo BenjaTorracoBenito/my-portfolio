@@ -81,12 +81,12 @@ function App() {
 
   return (
     <div className="App w-3/4 m-auto flex flex-col items-center justify-center">
-      <h1 className='font-semibold mt-10 text-5xl bg-gradient-to-br from-blue-500 to-purple-500 bg-clip-text text-transparent'>Color Contrast Checker</h1>
+      <h1 className='sofia-soft bold mt-10 text-6xl bg-gradient-to-br from-blue-500 to-purple-500 bg-clip-text text-transparent'>Color Contrast Checker</h1>
 
-      <div className='mt-4 flex gap-4 items-center'>
+      <div className='omnes-light italic text-lg mt-4 flex gap-4 items-center'>
         <label htmlFor="numColors">Cantidad de colores:</label>
         <input
-          className='p-1 rounded-md outline-1 outline-blue-500'
+          className='p-1 rounded-md outline-1 border-2 border-blue-500 outline-purple-500 outline-blue-500'
           type="number"
           id="numColors"
           value={numColors}
