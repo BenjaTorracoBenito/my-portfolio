@@ -90,7 +90,7 @@ function App() {
         Color Contrast Checker
       </h1>
 
-      <section className="my-6 grid grid-cols-1 grid-rows-auto md:grid-cols-2 gap-y-6 md:gap-6 place-items-center omnes-light text-lg bg-gradient-to-br from-blue-300 to-purple-300 rounded-xl p-6">
+      <section className="mx-6 my-6 grid grid-cols-1 grid-rows-auto md:grid-cols-2 gap-y-6 md:gap-6 place-items-center omnes-light text-lg bg-gradient-to-br from-blue-300 to-purple-300 rounded-xl p-6">
         <div className="col-span-2 grid grid-cols-2">
           <span
             className="place-self-start flex self-center text-white bg-blue-500 rounded-xl py-2 px-4"
@@ -121,7 +121,7 @@ function App() {
         </button>
       </section>
 
-      <section className="my-6 p-6 grid md:grid-cols-2 gap-4 bg-gradient-to-br from-blue-300 to-purple-300 rounded-xl">
+      <section className="mx-6 my-6 p-6 grid md:grid-cols-2 gap-4 bg-gradient-to-br from-blue-300 to-purple-300 rounded-xl">
         {contrastRatios.length > 0 &&
           contrastRatios.map((combo, index) => (
             <ContrastPair
