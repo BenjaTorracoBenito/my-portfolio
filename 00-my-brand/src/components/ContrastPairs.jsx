@@ -2,7 +2,7 @@ export function ContrastPair({ combo, userText, onSwitchToggle }) {
   return (
     <section>
       <div
-        className="w-96 md:w-80 min-h-32 rounded-xl p-6"
+        className="w-full md:w-96 min-h-32 rounded-xl p-6"
         style={{
           backgroundColor: combo.isSwitched ? combo.color2 : combo.color1,
           color: combo.isSwitched ? combo.color1 : combo.color2,

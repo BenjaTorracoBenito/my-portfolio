@@ -121,7 +121,7 @@ function App() {
         </button>
       </section>
 
-      <section className="mx-6 my-6 p-6 grid md:grid-cols-2 gap-4 bg-gradient-to-br from-blue-300 to-purple-300 rounded-xl">
+      <section className="mx-2 my-6 w-96 p-6 grid md:grid-cols-2 gap-4 bg-gradient-to-br from-blue-300 to-purple-300 rounded-xl">
         {contrastRatios.length > 0 &&
           contrastRatios.map((combo, index) => (
             <ContrastPair
