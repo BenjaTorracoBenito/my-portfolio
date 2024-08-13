@@ -1,20 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import {ColorPicker} from './components/ColorPicker';
-import {TextInput} from './components/TextInput';
-import {ContrastPair} from './components/ContrastPairs';
+import { ColorPicker } from "./components/ColorPicker";
+import { TextInput } from "./components/TextInput";
+import { ContrastPair } from "./components/ContrastPairs";
+import { Counter } from "./components/Counter"
 
-import './App.css';
+import "./App.css";
 
 function App() {
   const [numColors, setNumColors] = useState(2);
-  const [colors, setColors] = useState(['#000000', '#ffffff']);
+  const [colors, setColors] = useState(["#000000", "#ffffff"]);
   const [contrastRatios, setContrastRatios] = useState([]);
-  const [userText, setUserText] = useState('');
+  const [userText, setUserText] = useState("");
 
   useEffect(() => {
     if (colors.length < numColors) {
-      setColors([...colors, ...Array(numColors - colors.length).fill('#000000')]);
+      setColors([
+        ...colors,
+        ...Array(numColors - colors.length).fill("#000000"),
+      ]);
     } else if (colors.length > numColors) {
       setColors(colors.slice(0, numColors));
     }
@@ -35,6 +39,7 @@ function App() {
     setUserText(e.target.value);
   };
 
+
   const calculateContrast = () => {
     const ratios = [];
     for (let i = 0; i < colors.length; i++) {
@@ -44,7 +49,7 @@ function App() {
           color1: colors[i],
           color2: colors[j],
           ratio: ratio.toFixed(2),
-          isSwitched: false
+          isSwitched: false,
         });
       }
     }
@@ -80,45 +85,43 @@ function App() {
   };
 
   return (
-    <div className="App w-3/4 m-auto flex flex-col items-center justify-center">
-      <h1 className='sofia-soft bold mt-10 text-6xl bg-gradient-to-br from-blue-500 to-purple-500 bg-clip-text text-transparent'>Color Contrast Checker</h1>
+    <div className="App w-full flex flex-col justify-center items-center min-h-screen">
+      <h1 className="mx-6 sofia-soft bold mt-10 text-6xl bg-gradient-to-br from-blue-400 to-purple-400 bg-clip-text text-transparent">
+        Color Contrast Checker
+      </h1>
 
-      <div className='omnes-light italic text-lg mt-4 flex gap-4 items-center'>
-        <label htmlFor="numColors">Cantidad de colores:</label>
-        <input
-          className='p-1 rounded-md outline-1 border-2 border-blue-500 outline-purple-500 outline-blue-500'
-          type="number"
-          id="numColors"
-          value={numColors}
-          inputMode='numeric'
-          pattern='[0-9]*'
-          min="2"
-          max="8"
-          onChange={handleNumColorsChange}
-        />
-      </div>
+      <section className="my-6 grid grid-cols-1 grid-rows-auto md:grid-cols-2 gap-y-6 md:gap-6 place-items-center omnes-light text-lg bg-gradient-to-br from-blue-300 to-purple-300 rounded-xl p-6">
+        <div className="col-span-2 grid grid-cols-2">
+          <span
+            className="place-self-start flex self-center text-white bg-blue-500 rounded-xl py-2 px-4"
+            htmlFor="numColors"
+          >
+            Cantidad de colores
+          </span>
+          <Counter numColors={numColors} onNumColorsChange={setNumColors} handleColorChange={handleColorChange} />
+        </div>
 
-      <TextInput userText={userText} onChange={handleTextChange} />
+        <TextInput userText={userText} onChange={handleTextChange} />
 
-      <div className='mt-4 grid md:grid-cols-2 gap-4 grid-cols-1'>
-        {colors.map((color, index) => (
-          <ColorPicker
-            key={index}
-            color={color}
-            index={index}
-            onChange={handleColorChange}
-          />
-        ))}
-      </div>
+        <div className="w-full col-span-2 grid md:grid-cols-2 gap-4">
+          {colors.map((color, index) => (
+            <ColorPicker
+              key={index}
+              color={color}
+              index={index}
+              onChange={handleColorChange}
+            />
+          ))}
+        </div>
+        <button
+          onClick={calculateContrast}
+          className="md:col-span-2 py-4 px-6 bg-blue-500 transition duration-150 ease-in-out hover:bg-purple-500 font-medium text-white rounded-full"
+        >
+          Calcular contraste
+        </button>
+      </section>
 
-      <button
-        onClick={calculateContrast}
-        className='mt-4 py-4 px-6 bg-blue-500 transition duration-150 ease-in-out hover:bg-purple-500 font-medium text-white rounded-full'
-      >
-        Calcular Contraste
-      </button>
-
-      <div className="mt-4 w-3/4 grid grid-cols-2 gap-4">
+      <section className="my-6 p-6 grid md:grid-cols-2 gap-4 bg-gradient-to-br from-blue-300 to-purple-300 rounded-xl">
         {contrastRatios.length > 0 &&
           contrastRatios.map((combo, index) => (
             <ContrastPair
@@ -128,7 +131,7 @@ function App() {
               onSwitchToggle={() => handleSwitchToggle(index)}
             />
           ))}
-      </div>
+      </section>
     </div>
   );
 }
